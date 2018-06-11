@@ -1,0 +1,239 @@
+.tab {
+    overflow: hidden;
+    background-color: #4a1a67;
+    padding-left: 7%;
+    color: white;
+}
+.right-setting-head{
+    overflow: hidden;
+    border-radius: 25px;
+    background-color: #4a1a67;
+    /* padding-left: 10%; */
+    color: white;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.tab button:hover {
+    background-color: #4a1a67;
+}
+.tab button.active {
+    background-color: #724a8c;
+}
+.tabcontent {
+    display: none;
+    /* padding: 6px 12px; */
+    /* border: 1px solid #7B1FA2; */
+    border-top: none;
+}
+#background{
+    /* background: #A7FFEB; */
+    /* background: url(background.jpg); */
+    height: 100%;
+}
+#background-inside{
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 100%;
+}
+/* .tablinks{
+    margin-left: 10%;
+    margin-right: 10%;
+} */
+#crawler{
+    height: 100%;
+    background-color: white;
+    padding: 1%;
+    color: black;
+    margin: 1%;
+}
+
+#submit-crawler-button {
+    background-color: #4a1a67;
+}
+
+label {
+    color: #4a1a67;
+}
+
+h2 {
+    color: #4a1a67;
+}
+
+#listJob{
+    height: 100%;
+    background-color: white;
+    color: black;
+    padding: 1%;
+}
+.setting-left{
+    border-radius: 25px;
+    border: 2px solid black;
+    padding: 2%;
+    margin: 3px;
+    /* overflow: auto; */
+}
+input{
+    width: 100%;
+    color: black;
+}
+.background-setting-left{
+    /* border-radius: 25px;
+    border: 1px solid #E040FB; */
+    padding-top: 1%;
+    color: black;
+}
+.background-setting-right{
+    /* border-radius: 25px;
+    border: 1px solid #E040FB; */
+    color: black;
+    /* height: 88.5%; */
+    /* justify-content: space-between; */
+    padding-top: 1%;
+}
+.setting-input{
+    margin: 3px;
+}
+/* .setting-info{
+    margin: 3px; 
+} */
+.button-laytin, .button-luucauhinh, .button-setcrawl {
+    background-color: black;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.button-laytin{
+    right: 3%;
+}
+
+#listJob{
+    /* border-radius: 25px;
+    border: 1px solid #E040FB; */
+    margin: 3%;
+}
+.input-box{
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.display{
+    color: black;
+}
+#thongtin-cauhinh{
+    text-align: center;
+}
+#tab-info{
+    margin-top: 3%;
+}
+.infor{
+    border-radius: 25px;
+    border: 1px solid black;
+    color: black;
+}
+.title-info{
+    padding: 2%;
+}
+.footer{
+    justify-content: flex-end;
+    /* display: flex */
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+.preloading {
+    overflow: hidden;
+}
+.preload-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+    text-align: center;
+
+}
+.preload-icon {
+    font-size: 80px;
+    color: white;
+    align-self: center;
+}
+
+@-webkit-keyframes {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1.5s linear infinite;
+  -moz-animation: rotating 1.5s linear infinite;
+  -ms-animation: rotating 1.5s linear infinite;
+  -o-animation: rotating 1.5s linear infinite;
+  animation: rotating 1.5s linear infinite;
+}
+
+table.dataTable thead th {
+    color: #4a1a67;
+}
+
+table.dataTable thead th.search_input {
+    border-bottom: 0;
+}
+
+
+.text-wrap{
+    white-space:normal;
+}
+.width-200{
+    width:200px;
+}

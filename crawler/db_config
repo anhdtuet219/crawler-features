@@ -1,0 +1,12 @@
+<?php
+define('TABLE_DB', 'jobs');
+define('JOB_NAME_COLUMN', 'job_name');
+define('JOB_LINK_COLUMN', 'job_link');
+define('JOB_TYPE_COLUMN', 'job_type');
+define('JOB_SALARY_COLUMN', 'job_salary');
+define('JOB_LOCATION_COLUMN', 'job_location');
+define('JOB_COMPANY_COLUMN', 'job_company');
+define('JOB_SOURCE_TYPE', 'source_id');
+define('H_SOURCE_ID', 1);
+define('CAREERLINK_SOURCE_ID', 2);
+define('CAREERBUILDER_SOURCE_ID', 3);
