@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-select.css">
 </head>
 
 <body>
@@ -31,12 +29,14 @@
                 <form name="get-jobs-form">
                     <div class="form-group" >
                         <label for="source-get-jobs">Lựa chọn nguồn lấy tin:</label>
-                        <select class="form-control" name="source" id="source-get-jobs" required="true" onchange="getCareers()">
+                        <select class="selectpicker form-control" name="source" id="source-get-jobs" required="true" onchange="getCareers()">
                         </select>
                         <br>
+                        <br>
                         <label for="type-get-jobs">Lựa chọn ngành nghề:</label>
-                        <select class="form-control" name="career" id="career-get-jobs" multiple>
+                        <select class="selectpicker form-control" data-live-search="true" data-actions-box="true" multiple name="career"  id="career-get-jobs">
                         </select>
+                        <br>
                         <br>
                         <label for="limit-get-jobs">Giới hạn số công việc lấy được của mỗi ngành nghề: </label>
                         <input class="form-control" type="number" name="limit-jobs" id="limit-get-jobs" min="1" max="1000" required="true">
@@ -60,115 +60,118 @@
         </div>
     </div>
 
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
     <script src="js/control.js"></script>
-</body>
-
-<script>
-function getCareers() {
-    var selectSource = document.getElementById('source-get-jobs');
-    var sourceId = selectSource.value;
-    //append options to careers dropdown list
-    var selectCareer = document.getElementById('career-get-jobs');
-    $.ajax({
-        type: 'GET',
-        url: 'process.php/careers?source_id=' + sourceId,
-        beforeSend: function() {
-            //to do
-            $('#preload').fadeIn('fast');
-            $(".preloading").css("display", "block");
-            console.log("Starting to get option for career form");
-        },
-        success: function(data) {
-            $('#preload').fadeOut('fast');
-            selectCareer.innerHTML = "";
-            //create option and add to select
-            for (var i = 0; i < data.length; i++) {
-                var option = document.createElement('option');
-                option.value = data[i].link;
-                option.text = data[i].title;
-                selectCareer.appendChild(option);
-            }
-        },
-        error: function() {
-            $('#preload').fadeOut('fast');
-            console.log("Network or api is Failed")
-        }
-    });
-}
-</script>
-
-<script>
-
-    $("#example_filter").hide();
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    document.getElementById('crawler').style.display = "block";
-
-    $(document).ready(function() {
-        //append options to sources dropdown list
-        var selectSource = document.getElementById('source-get-jobs');
-        $.ajax({
-            type: 'GET',
-            url: 'process.php/sources',
-            beforeSend: function() {
-                //to do
-                console.log("Starting to get option for form");
-            },
-            success: function(data) {
-                //create option and add to select
-                for (var i = 0; i < data.length; i++) {
-                    var option = document.createElement('option');
-                    option.value = data[i].source_id;
-                    option.text = data[i].source_name;
-                    selectSource.appendChild(option);
-                }
-                getCareers();
-            },
-            error: function() {
-                console.log("Network or api is Failed")
-            }
-        });
-
-
-
-    });
-
-    $(function() {
-        //handle submit form event
-        var form = $('form');
-        form.submit(function(e) {
-            e.preventDefault();
+    <script>
+        function getCareers() {
+            var selectSource = document.getElementById('source-get-jobs');
+            var sourceId = selectSource.value;
+            //append options to careers dropdown list
+            var selectCareer = document.getElementById('career-get-jobs');
             $.ajax({
-                type: 'POST',
-                url: 'process.php/jobs',
-                data: form.serialize(),
-                beforeSend: function () {
-                    console.log("start crawling...");
+                type: 'GET',
+                url: 'process.php/careers?source_id=' + sourceId,
+                beforeSend: function() {
+                    //to do
                     $('#preload').fadeIn('fast');
                     $(".preloading").css("display", "block");
+                    console.log("Starting to get option for career form");
                 },
-                success: function (data) {
+                success: function(data) {
                     $('#preload').fadeOut('fast');
-                    reload = true;
-                    alert("Lấy dữ liệu thành công!");
+                    selectCareer.innerHTML = "";
+                    //create option and add to select
+                    for (var i = 0; i < data.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = data[i].link;
+                        option.text = data[i].title;
+                        selectCareer.appendChild(option);
+                    }
+                    $('#career-get-jobs').selectpicker('refresh');
                 },
-                error: function (e) {
-                    console.log(e);
+                error: function() {
                     $('#preload').fadeOut('fast');
-                    reload = true;
-                    alert("Gặp lỗi trong quá trình lấy dữ liệu!");
+                    console.log("Network or api is Failed")
                 }
             });
+        }
+    </script>
+
+    <script>
+        $("#example_filter").hide();
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        document.getElementById('crawler').style.display = "block";
+
+        $(document).ready(function() {
+            //append options to sources dropdown list
+            var selectSource = document.getElementById('source-get-jobs');
+            $.ajax({
+                type: 'GET',
+                url: 'process.php/sources',
+                beforeSend: function() {
+                    //to do
+                    console.log("Starting to get option for form");
+                },
+                success: function(data) {
+                    //create option and add to select
+                    for (var i = 0; i < data.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = data[i].source_id;
+                        option.text = data[i].source_name;
+                        selectSource.appendChild(option);
+                    }
+                    $('#source-get-jobs').selectpicker('refresh');
+                    getCareers();
+                },
+                error: function() {
+                    console.log("Network or api is Failed")
+                }
+            });
+
+            
+
         });
-    })
-</script>
 
+        $(function() {
+            //handle submit form event
+            var form = $('form');
+            form.submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'process.php/jobs',
+                    data: form.serialize(),
+                    beforeSend: function () {
+                        console.log("start crawling...");
+                        $('#preload').fadeIn('fast');
+                        $(".preloading").css("display", "block");
+                    },
+                    success: function (data) {
+                        $('#preload').fadeOut('fast');
+                        reload = true;
+                        alert("Lấy dữ liệu thành công!");
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        $('#preload').fadeOut('fast');
+                        reload = true;
+                        alert("Gặp lỗi trong quá trình lấy dữ liệu!");
+                    }
+                });
+            });
+        })
+    </script>
 
-
+</body>
 <?php
 //autoload of classes
 function __autoload($className) {

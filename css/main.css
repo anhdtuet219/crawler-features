@@ -101,30 +101,6 @@ input{
 .setting-input{
     margin: 3px;
 }
-/* .setting-info{
-    margin: 3px; 
-} */
-.button-laytin, .button-luucauhinh, .button-setcrawl {
-    background-color: black;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.button{
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
-.button-laytin{
-    right: 3%;
-}
 
 #listJob{
     /* border-radius: 25px;
@@ -236,4 +212,8 @@ table.dataTable thead th.search_input {
 }
 .width-200{
     width:200px;
+}
+
+.bootstrap-select > .dropdown-toggle {
+    height: 100%;
 }

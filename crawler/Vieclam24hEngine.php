@@ -26,8 +26,6 @@ class Vieclam24hEngine extends AbstractEngine
         $condition = array();
         $condition[JOB_SOURCE_TYPE] = $this->sourceId;
         $this->dbHelper->delete(TABLE_DB, $condition);
-        //get all type job links from $seedUrl
-        $this->typeJobLinks = $this->getAllTypeJobLinks();
         $this->getJobsAndInsertDb();
     }
 

@@ -93,6 +93,33 @@ class JobCrawlerController {
         }
     }
 
+    public function processTest($source, $careerTitles, $careerLinks, $limit) {
+        //get all type job links from $seedUrl
+        $res = $this->dbHelper->select('sources');
+        $info = array();
+        foreach ($res as $key => $value) {
+            if ($value['source_id'] === ''.$source.'') {
+                $info = $value;
+                break;
+            }
+        }
+        switch ($source) {
+            case VIEC_LAM_24H:
+                $this->engine = Vieclam24hEngine::getInstance();
+                break;
+            case CAREERLINK:
+                $this->engine = CareerlinkEngine::getInstance();
+                break;
+            case CAREERBUILDER:
+                $this->engine = CareerbuilderEngine::getInstance();
+                break;
+        }
+
+        $this->engine->setLimit($limit);
+        $this->engine->setInfoEngine($info);
+        $this->engine->setCrawlCareersList($careerTitles, $careerLinks);
+        $this->engine->process();
+    }
 
 
 }

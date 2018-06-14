@@ -27,6 +27,30 @@ $app->post('/jobs', function () use ($app) {
     echoResponse(200, $response);
 });
 
+$app->post('/jobs_test', function () use ($app) {
+    $response = array();
+    $source = $_POST["source"];
+    if (isset($_POST["career-link"])) {
+        $careerLinks = $_POST["career-link"];
+    }
+    else {
+        $careerLinks = "";    
+    }
+
+    if (isset($_POST["career-title"])) {
+        $careerTitles = $_POST["career-title"];
+    }
+    else {
+        $careerTitles = "";    
+    }
+    
+    $limit = $_POST["limit-jobs"];
+
+    $crawler = new \crawler\JobCrawlerController();
+    $crawler->processTest($source, $careerTitles, $careerLinks, $limit);
+    echoResponse(200, $response);
+});
+
 $app->get('/jobs', function () use ($app) {
     $dbHelper = \helpers\DBHelper::instance();
     $response = $dbHelper->select('jobs');

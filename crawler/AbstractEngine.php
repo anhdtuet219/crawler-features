@@ -90,6 +90,24 @@ abstract class AbstractEngine
         $this->firstPage = $info['source_first_page'];
     }
 
+    public function setCrawlCareersList($careerTitles, $careerLinks) {
+        $this->typeJobLinks = array();
+        if ($careerTitles !== "") {
+            $titles = explode(',', $careerTitles);
+            $links = explode(',', $careerLinks);
+            $i = 0;
+            foreach($titles as $title) {
+                $career = array();
+                $career['link'] = $links[$i];
+                $career['title'] = $title;
+                $this->typeJobLinks[] = $career;
+            }
+        }
+        else {
+            $this->typeJobLinks = $this->getAllTypeJobLinks();
+        }
+    }
+
     public function setLimit($limit) {
         $this->limit = $limit;
     }
