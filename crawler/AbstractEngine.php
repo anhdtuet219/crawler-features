@@ -92,7 +92,7 @@ abstract class AbstractEngine
 
     public function setCrawlCareersList($careerTitles, $careerLinks) {
         $this->typeJobLinks = array();
-        if ($careerTitles !== "") {
+        if (!empty($careerTitles)) {
             $titles = explode(',', $careerTitles);
             $links = explode(',', $careerLinks);
             $i = 0;
@@ -101,6 +101,7 @@ abstract class AbstractEngine
                 $career['link'] = $links[$i];
                 $career['title'] = $title;
                 $this->typeJobLinks[] = $career;
+                $i++;
             }
         }
         else {

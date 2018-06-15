@@ -39,7 +39,7 @@
                         <br>
                         <br>
                         <label for="limit-get-jobs">Giới hạn số công việc lấy được của mỗi ngành nghề: </label>
-                        <input class="form-control" type="number" name="limit-jobs" id="limit-get-jobs" min="1" max="1000" required="true">
+                        <input class="form-control" type="number" name="limit_jobs" id="limit-get-jobs" min="1" max="1000" required="true">
                         <br>
                         <button type="submit" id="submit-crawler-button" class="btn btn-info btn-block">Start</button>
                     </div>
@@ -149,7 +149,12 @@
                 $.ajax({
                     type: 'POST',
                     url: 'process.php/jobs',
-                    data: form.serialize(),
+                    data: {
+                        source: $('#source-get-jobs').val(),
+                        career_link: $('#career-get-jobs').val().join(),
+                        career_title: $('[data-id="career-get-jobs"]').attr("title"),
+                        limit_jobs: $('#limit-get-jobs').val()
+                    },
                     beforeSend: function () {
                         console.log("start crawling...");
                         $('#preload').fadeIn('fast');
