@@ -14,7 +14,6 @@
         include "helpers/DBHelper.php";
         header("content-type: text/html; charset=UTF-8");
         set_time_limit(2147483647);
-        $crawler = new \crawler\JobCrawlerController();
     ?>
 
     <div class="tab">

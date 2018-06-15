@@ -4,16 +4,20 @@ var reload = true;
 function changeTab(evt, tabName) {
     $("#example_filter").hide();
     var i, tabcontent, tablinks;
+    //lay danh sach cac div cua moi tab roi an di
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
+    //lay danh sach cac tab (button) co class name la tablinks roi xet chung deu khong active
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
+    //cho hien thi div cua tab duoc chon, them class name active vao tab de hien thi xem tab nao duoc chon 
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+    //goi ham de xuat du lieu
     if (tabName === 'crawler') {
 
     }
