@@ -28,7 +28,7 @@
                 <form name="get-jobs-form">
                     <div class="form-group" >
                         <label for="source-get-jobs">Lựa chọn nguồn lấy tin:</label>
-                        <select class="selectpicker form-control" name="source" id="source-get-jobs" required="true" onchange="getCareers()">
+                        <select class="selectpicker form-control" name="source" id="source-get-jobs" required="true" onchange="getCareers()" multiple>
                         </select>
                         <br>
                         <br>
@@ -66,10 +66,42 @@
     <script src="js/bootstrap-select.js"></script>
     <script src="js/control.js"></script>
     <script>
+        //danh sach tat ca cac source id cua select
+        var listAllSourceIds = [];
+        var listAllSourceNames = [];
+        //mang luu trang thai viec lay du lieu danh sach cong viec tu mot nguon
+        //voi true la da lay va false la chua lay
+        var checkCrawlSource = [false, false, false];
+        //mang su dung de luu tru cac gia tri duoc chon
         function getCareers() {
+          console.log(listAllSourceIds);
             var selectSource = document.getElementById('source-get-jobs');
-            var sourceId = selectSource.value;
-            //append options to careers dropdown list
+            //lay tat ca sourceId cua cac nguon du lieu dang duoc lua chon
+            var selectedSourceIds = $('#source-get-jobs').val();
+            for (var index = 0; index < listAllSourceIds.length; index++) {
+                console.log(index);
+                var sourceId = listAllSourceIds[index];
+                //lay index cua phan tu trong mang source duoc chon
+                var indexChosenSource = selectedSourceIds.indexOf(sourceId);
+                //neu indexChosenSource khong ton tai, nghia la khong nam trong array thi se xoa phan tu do di khoi select
+                if (indexChosenSource < 0) {
+                    checkCrawlSource[index] = false;
+                    $('[data-id="' + sourceId + '"').remove();
+                    $('#career-get-jobs').selectpicker('refresh');
+                }
+                //neu indexChosenSource ton tai thi ta se lay du lieu voi source nao co trang thai la chua lay du lieu
+                else {
+                    if (checkCrawlSource[index] == false) {
+                        //append options to careers dropdown list
+                        var sourceName = listAllSourceNames[index];
+                        getCareersAjax(sourceId, sourceName);
+                        checkCrawlSource[index] = true;
+                    }
+                }
+            }
+        }
+
+        function getCareersAjax(sourceId, sourceName) {
             var selectCareer = document.getElementById('career-get-jobs');
             $.ajax({
                 type: 'GET',
@@ -82,12 +114,13 @@
                 },
                 success: function(data) {
                     $('#preload').fadeOut('fast');
-                    selectCareer.innerHTML = "";
                     //create option and add to select
                     for (var i = 0; i < data.length; i++) {
                         var option = document.createElement('option');
                         option.value = data[i].link;
                         option.text = data[i].title;
+                        option.setAttribute('data-id', sourceId);
+                        option.setAttribute('data-subtext', "(" + sourceName + ")")
                         selectCareer.appendChild(option);
                     }
                     $('#career-get-jobs').selectpicker('refresh');
@@ -123,21 +156,22 @@
                 success: function(data) {
                     //create option and add to select
                     for (var i = 0; i < data.length; i++) {
+                        console.log("Running...");
                         var option = document.createElement('option');
                         option.value = data[i].source_id;
                         option.text = data[i].source_name;
                         selectSource.appendChild(option);
                     }
                     $('#source-get-jobs').selectpicker('refresh');
-                    getCareers();
+                    $('#source-get-jobs option').each(function() {
+                        listAllSourceIds.push($(this).val());
+                        listAllSourceNames.push($(this).text());
+                    });
                 },
                 error: function() {
                     console.log("Network or api is Failed")
                 }
             });
-
-            
-
         });
 
         $(function() {
@@ -149,7 +183,7 @@
                     type: 'POST',
                     url: 'process.php/jobs',
                     data: {
-                        source: $('#source-get-jobs').val(),
+                        source: $('#source-get-jobs').val().join(),
                         career_link: $('#career-get-jobs').val().join(),
                         career_title: $('[data-id="career-get-jobs"]').attr("title"),
                         limit_jobs: $('#limit-get-jobs').val()

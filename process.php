@@ -14,19 +14,6 @@ set_time_limit(2147483647);
 
 $app = new \Slim\Slim();
 
-
-// $app->post('/jobs', function () use ($app) {
-//     $response = array();
-//     $source = $_POST["source"];
-//     $limit = $_POST["limit-jobs"];
-//     $response["ok"] = "ok";
-//     $response["source"] = $source;
-//     $response["limit"] = $limit;
-//     $crawler = new \crawler\JobCrawlerController();
-//     $crawler->process($source, $limit);
-//     echoResponse(200, $response);
-// });
-
 $app->post('/jobs', function () use ($app) {
     $response = array();
     $source = $_POST["source"];
@@ -34,15 +21,15 @@ $app->post('/jobs', function () use ($app) {
     if (isset($_POST["career_link"])) {
         $careerLinks = $_POST["career_link"];
     }
-    $careerTitles = ""; 
+    $careerTitles = "";
     if (isset($_POST["career_title"])) {
         $careerTitles = $_POST["career_title"];
     }
-    
+
     $limit = $_POST["limit_jobs"];
 
     $crawler = new \crawler\JobCrawlerController();
-    $crawler->processTest($source, $careerTitles, $careerLinks, $limit);
+    $crawler->process($source, $careerTitles, $careerLinks, $limit);
     echoResponse(200, $response);
 });
 

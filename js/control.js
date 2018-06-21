@@ -14,7 +14,7 @@ function changeTab(evt, tabName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    //cho hien thi div cua tab duoc chon, them class name active vao tab de hien thi xem tab nao duoc chon 
+    //cho hien thi div cua tab duoc chon, them class name active vao tab de hien thi xem tab nao duoc chon
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
     //goi ham de xuat du lieu
@@ -97,7 +97,7 @@ function loadData(data) {
                 th.style.textAlign = "center";
             }
             trHead.appendChild(th);
-            
+
         }
         thead.appendChild(trHead);
         jobTable.appendChild(thead);
@@ -109,23 +109,23 @@ function loadData(data) {
             var thName = document.createElement('td');
             thName.textContent = data[i].job_name;
             trBody.appendChild(thName);
-            
+
             var thType = document.createElement('td');
             thType.textContent = data[i].job_type;
             trBody.appendChild(thType);
-            
+
             var thLocation = document.createElement('td');
             thLocation.textContent = data[i].job_location;
             trBody.appendChild(thLocation);
-            
+
             var thCompany = document.createElement('td');
             thCompany.textContent = data[i].job_company;
             trBody.appendChild(thCompany);
-            
+
             var thSalary = document.createElement('td');
             thSalary.textContent = data[i].job_salary;
             trBody.appendChild(thSalary);
-            
+
             var thSource = document.createElement('td');
             var pos = data[i].source_id;
             switch (pos) {
@@ -149,7 +149,7 @@ function loadData(data) {
             thLink.style.textAlign = "center";
             thLink.appendChild(a)
             trBody.appendChild(thLink);
-            
+
             tbody.appendChild(trBody);
             tbody.id = "listJob-tbody";
         }
