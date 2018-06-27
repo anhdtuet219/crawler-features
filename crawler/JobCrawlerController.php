@@ -62,7 +62,7 @@ class JobCrawlerController {
                 break;
         }
         $this->engine->setInfoEngine($info);
-        return $this->engine->getAllTypeJobLinks();
+        return $this->engine->getCareerLinks();
     }
 
     public function process($sources, $careerTitles, $careerLinks, $limit) {

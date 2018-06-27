@@ -98,7 +98,7 @@ abstract class AbstractEngine
         $this->limit = $limit;
     }
 
-    public function getAllTypeJobLinks() {
+    public function getCareerLinks() {
         $typeJobInfo = array();
         $links = array();
         $titles = array();

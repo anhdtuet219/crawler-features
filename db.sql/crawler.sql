@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2018 at 12:52 PM
+-- Generation Time: Jun 26, 2018 at 08:06 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -39,23 +39,27 @@ CREATE TABLE `jobs` (
   `source_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `jobs`
+-- Table structure for table `schedule`
 --
 
-INSERT INTO `jobs` (`job_id`, `job_name`, `job_link`, `job_type`, `job_salary`, `job_location`, `job_company`, `source_id`) VALUES
-(33, 'Nhân Viên Phục Vụ Nhà Hàng Khách Sạn My Way', 'https://vieclam24h.vn/khach-san-nha-hang/nhan-vien-phuc-vu-nha-hang-khach-san-c84p0id2749980.html', 'Thực phẩm-Đồ uống', '5 - 7 triệu', 'Hà Nội', 'Công ty Cổ phần Thực phẩm và Dịch vụ My Way', 1),
-(34, 'Nhân Viên Mua Hàng Tại Hà Nội', 'https://vieclam24h.vn/ke-toan-kiem-toan/nhan-vien-mua-hang-tai-ha-noi-c30p0id2895267.html', 'Thực phẩm-Đồ uống', '5 - 7 triệu', 'Hà Nội', 'Công ty cổ phần Paris Gâteaux Việt Nam', 1),
-(35, 'Kế Toán Tổng Hợp - Kế Toán Thuế', 'https://vieclam24h.vn/dich-vu/ke-toan-tong-hop-ke-toan-thue-c7p0id2367223.html', ' Dịch vụ', '7 – 10 triệu', 'Hà Nội', 'Công Ty Cổ Phần Cơ Điện Lạnh Hoàng Đạt', 1),
-(36, 'Nhân Viên Phục Vụ Nhà Hàng Khách Sạn My Way', 'https://vieclam24h.vn/khach-san-nha-hang/nhan-vien-phuc-vu-nha-hang-khach-san-c84p0id2749980.html', ' Dịch vụ', '5 - 7 triệu', 'Hà Nội', 'Công ty Cổ phần Thực phẩm và Dịch vụ My Way', 1),
-(37, 'Kế Toán Trưởng', 'https://careerlink.vn/tim-viec-lam/ke-toan-truong/1300759', 'Kế toán / Kiểm toán', 'Cạnh tranh | Quản lý / Trưởng phòng', 'Hồ Chí Minh', 'Công ty TNHH Handee', 2),
-(38, 'Nhân Viên Kế Toán Công Nợ Nước Ngoài - Mức lương 7 – 10 triệu', 'https://careerlink.vn/tim-viec-lam/nhan-vien-ke-toan-cong-no-nuoc-ngoai-muc-luong-7-%E2%80%93-10-trieu/1300720', 'Kế toán / Kiểm toán', '7,000,000VNĐ - 10,000,000VNĐ | Nhân viên', 'Hồ Chí Minh', 'CÔNG TY TNHH VẬN TẢI VIỆT NHẬT', 2),
-(39, 'Trưởng Phòng Kinh Doanh Du Lịch', 'https://careerlink.vn/tim-viec-lam/truong-phong-kinh-doanh-du-lich/1287946', 'Khách sạn / Du lịch', 'Thương lượng | Quản lý / Trưởng phòng', 'Hà Nội', 'Công Ty CP ĐTTM Và DVDL Quốc Tế Xanh', 2),
-(40, 'Nhân Viên Sales Tour Du Lịch', 'https://careerlink.vn/tim-viec-lam/nhan-vien-sales-tour-du-lich/1287942', 'Khách sạn / Du lịch', '7,000,000VNĐ - 15,000,000VNĐ | Nhân viên', 'Hà Nội', 'Công Ty CP ĐTTM Và DVDL Quốc Tế Xanh', 2),
-(41, 'Channel Marketing Manager', 'https://careerbuilder.vn/vi/tim-viec-lam/channel-marketing-manager.35AEDAFB.html', 'Quảng cáo / Đối ngoại / Truyền Thông', 'Lương: Cạnh tranh', 'Hồ Chí Minh', 'Prudential', 3),
-(42, 'Digital Marketing', 'https://careerbuilder.vn/vi/tim-viec-lam/digital-marketing.35AEE95F.html', 'Quảng cáo / Đối ngoại / Truyền Thông', 'Lương: 7 Tr - 20 Tr VND', 'Hồ Chí Minh', 'CÔNG TY TNHH GOALEVO', 3),
-(43, 'Họa Viên Kiến Trúc (Revit)', 'https://careerbuilder.vn/vi/tim-viec-lam/hoa-vien-kien-truc-revit.35AF1FB3.html', 'Nội ngoại thất', 'Lương: Cạnh tranh', 'Hồ Chí Minh', 'Kume Design Asia Co., Ltd - KDA', 3),
-(44, 'Nhân viên Kinh Doanh Nội Thất Hoàn Thiện', 'https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kinh-doanh-noi-that-hoan-thien.35AF287E.html', 'Nội ngoại thất', 'Lương: Trên 10 Tr VND', 'Hồ Chí Minh', 'CÔNG TY TNHH XUẤT NHẬP KHẨU OSI', 3);
+CREATE TABLE `schedule` (
+  `schedule_id` int(11) NOT NULL,
+  `schedule_api_link` text NOT NULL,
+  `schedule_source` text NOT NULL,
+  `schedule_career_link` text NOT NULL,
+  `schedule_limit_jobs` text NOT NULL,
+  `schedule_career_title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_id`, `schedule_api_link`, `schedule_source`, `schedule_career_link`, `schedule_limit_jobs`, `schedule_career_title`) VALUES
+(1, 'http://localhost/features/crawler/process.php/jobs', '1', 'https://vieclam24h.vn/quan-tri-kinh-doanh-c14.html,https://vieclam24h.vn/ban-hang-c63.html', '2', 'Quản trị kinh doanh, Bán hàng');
 
 -- --------------------------------------------------------
 
@@ -98,6 +102,12 @@ ALTER TABLE `jobs`
   ADD KEY `job_source_id` (`source_id`);
 
 --
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
 -- Indexes for table `sources`
 --
 ALTER TABLE `sources`
@@ -111,7 +121,13 @@ ALTER TABLE `sources`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sources`

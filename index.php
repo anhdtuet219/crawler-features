@@ -17,7 +17,7 @@
     ?>
 
     <div class="tab">
-        <button class="tablinks active" onclick="changeTab(event, 'crawler')">Lấy danh sách công việc</button>
+        <button class="tablinks active" onclick="changeTab(event, 'crawler')">Cập nhật Scheduler</button>
         <button class="tablinks" onclick="changeTab(event, 'listJob')">Danh sách việc làm</button>
     </div>
     <div id="background">
@@ -40,7 +40,7 @@
                         <label for="limit-get-jobs">Giới hạn số công việc lấy được của mỗi ngành nghề: </label>
                         <input class="form-control" type="number" name="limit_jobs" id="limit-get-jobs" min="1" max="1000" required="true">
                         <br>
-                        <button type="submit" id="submit-crawler-button" class="btn btn-info btn-block">Start</button>
+                        <button type="submit" id="submit-crawler-button" class="btn btn-info btn-block">Cập nhật scheduler</button>
                     </div>
                 </form>
             </div>
@@ -181,7 +181,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: 'POST',
-                    url: 'process.php/jobs',
+                    url: 'process.php/update/schedule',
                     data: {
                         source: $('#source-get-jobs').val().join(),
                         career_link: $('#career-get-jobs').val().join(),
@@ -190,19 +190,13 @@
                     },
                     beforeSend: function () {
                         console.log("start crawling...");
-                        $('#preload').fadeIn('fast');
-                        $(".preloading").css("display", "block");
                     },
                     success: function (data) {
-                        $('#preload').fadeOut('fast');
-                        reload = true;
-                        alert("Lấy dữ liệu thành công!");
+                        alert("Cập nhật scheduler thành công!");
                     },
                     error: function (e) {
                         console.log(e);
-                        $('#preload').fadeOut('fast');
-                        reload = true;
-                        alert("Gặp lỗi trong quá trình lấy dữ liệu!");
+                        alert("Gặp lỗi trong quá trình update scheduler!");
                     }
                 });
             });
@@ -220,3 +214,4 @@ function __autoload($className) {
 }
 ?>
 </html>
+
