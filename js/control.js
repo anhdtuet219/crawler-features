@@ -1,6 +1,4 @@
 //check time to reload list jobs
-var reload = true;
-
 function changeTab(evt, tabName) {
     $("#example_filter").hide();
     var i, tabcontent, tablinks;
@@ -27,55 +25,26 @@ function changeTab(evt, tabName) {
 }
 
 function on_loadListJob(){
-    console.log(reload)
-    if (reload) {
-        reload = false;
-        $.ajax({
-            type: 'GET',
-            url: 'process.php/jobs',
-            beforeSend: function () {
-                console.log("start load list...");
-                $('#preload').fadeIn('fast');
-                $(".preloading").css("display", "block");
-            },
-            success: function (data) {
-                $('#preload').fadeOut('fast');
-                loadData(data);
-            },
-            error: function (e) {
-                console.log(e);
-                $('#preload').fadeOut('fast');
-                alert("Gặp lỗi trong quá trình lấy dữ liệu!");
-            }
-        });
-    }
+    $.ajax({
+        type: 'GET',
+        url: 'process.php/jobs',
+        beforeSend: function () {
+            console.log("start load list...");
+            $('#preload').fadeIn('fast');
+            $(".preloading").css("display", "block");
+        },
+        success: function (data) {
+            $('#preload').fadeOut('fast');
+            loadData(data);
+        },
+        error: function (e) {
+            console.log(e);
+            $('#preload').fadeOut('fast');
+            alert("Gặp lỗi trong quá trình lấy dữ liệu!");
+        }
+    });
 
-}
 
-function loadDataOneLine(data, i) {
-    var html = "";
-    html+='<tr>'
-    html+='<td>'+data[i].job_name+'</td>'
-    html+='<td>'+data[i].job_type+'</td>'
-    html+='<td>'+data[i].job_location+'</td>'
-    html+='<td>'+data[i].job_company+'</td>'
-    html+='<td>'+data[i].job_salary+'</td>'
-    html+='<td><a target="_blank" href="' + data[i].job_link + '">Xem chi tiết</a></td>';
-    var pos = data[i].source_id;
-    switch (pos) {
-        case '1':
-            html+='<td>https://vieclam24h.vn/</td>';
-            break;
-        case '2':
-            html+='<td>https://careerlink.vn/</td>';
-            break;
-        case '3':
-            html+='<td>https://careerbuilder.vn/</td>';
-            break;
-    }
-
-    html+='</tr>';
-    return html;
 }
 
 function loadData(data) {
