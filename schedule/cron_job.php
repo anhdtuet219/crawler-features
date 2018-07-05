@@ -6,7 +6,10 @@
  * Time: 7:09 PM
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/features/crawler/helpers/DBHelper.php';
+//DBHelper path
+$path =  dirname(dirname(__FILE__)) . '\helpers\DBHelper.php';
+
+require_once($path);
 
 use helpers\DBHelper as DBHelper;
 
