@@ -10,6 +10,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/features/crawler/helpers/DBHelper.php
 
 use helpers\DBHelper as DBHelper;
 
+set_time_limit(2147483647);
+
 $dbHelper = DBHelper::instance();
 $infoSchedule = $dbHelper->select(SCHEDULE_TABLE);
 

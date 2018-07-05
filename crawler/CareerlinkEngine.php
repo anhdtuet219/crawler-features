@@ -80,6 +80,9 @@ class CareerlinkEngine extends AbstractEngine
             if ($this->countLimitArray[$indexOfTypeJob] < $this->limit) {
                 //if number of jobs less than limit, continuing to crawl
                 $linkItem = 'https://careerlink.vn' . $link->getAttribute('href');
+                if ($titleItems[$i] == null) {
+                    continue;
+                }
                 $titleItem = $titleItems[$i]->nodeValue;
                 $companyItem = $companyItems[$i]->nodeValue;
                 $aTag = $locationItems[$i]->getElementsByTagName('a');
